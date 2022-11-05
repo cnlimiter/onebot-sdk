@@ -87,8 +87,8 @@ public class BotUtils {
      * @return 用户昵称
      */
     public static String getNickname(long userId) {
-        var url = String.format("https://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=%s", userId);
-        var result = NetUtils.get(url, "GBK");
+        String url = String.format("https://r.qzone.qq.com/fcg-bin/cgi_get_portrait.fcg?uins=%s", userId);
+        String result = NetUtils.get(url, "GBK");
         if (result != null && !result.isEmpty()) {
             String nickname = result.split(",")[6];
             return nickname.substring(1, nickname.length() - 1);
@@ -183,9 +183,9 @@ public class BotUtils {
      * @return 转发消息
      */
     public static List<Map<String, Object>> generateForwardMsg(long uin, String name, List<String> contents) {
-        var nodes = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> nodes = new ArrayList<Map<String, Object>>();
         contents.forEach(msg -> {
-            var node = new HashMap<String, Object>(16) {{
+            Map<String, Object> node = new HashMap<String, Object>(16) {{
                 put("type", "node");
                 put("data", new HashMap<String, Object>(16) {{
                     put("name", name);
