@@ -1,8 +1,9 @@
 package cn.evolvefield.onebot.sdk.util.json.util;
 
 import com.google.gson.*;
-import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,8 +15,9 @@ import java.util.UUID;
  * Date: 2022/1/20 10:32
  * Version: 1.0
  */
-@Slf4j
 public class JsonUtil {
+    private static final Logger log = LoggerFactory.getLogger(JsonUtil.class);
+
     private static final JsonUtil instance = new JsonUtil();
     private static final JsonParser parser = new JsonParser();
     private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();

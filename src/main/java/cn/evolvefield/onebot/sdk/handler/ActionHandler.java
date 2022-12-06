@@ -1,11 +1,11 @@
 package cn.evolvefield.onebot.sdk.handler;
 
-import cn.evolvefield.onebot.sdk.model.action.common.ActionPath;
 import cn.evolvefield.onebot.sdk.connection.ModWebSocketClient;
 import cn.evolvefield.onebot.sdk.model.action.common.ActionPath;
 import cn.evolvefield.onebot.sdk.util.ActionSendUtils;
 import com.google.gson.JsonObject;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +16,9 @@ import java.util.Map;
  * Date: 2022/9/14 15:05
  * Version: 1.0
  */
-@Slf4j
 public class ActionHandler {
+    private static final Logger log = LoggerFactory.getLogger(ActionHandler.class);
+
     /**
      * 请求回调数据
      */

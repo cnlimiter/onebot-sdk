@@ -4,7 +4,8 @@ import cn.evolvefield.onebot.sdk.listener.EnableListener;
 import cn.evolvefield.onebot.sdk.listener.Listener;
 import cn.evolvefield.onebot.sdk.util.ListenerUtils;
 import cn.evolvefield.onebot.sdk.util.json.util.GsonUtil;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +22,8 @@ import java.util.concurrent.Executors;
  * Version: 1.0
  */
 @SuppressWarnings("unused")
-@Slf4j
 public class EventDispatchers implements Runnable{
+    private static final Logger log = LoggerFactory.getLogger(EventDispatchers.class);
 
     //存储监听器对象
     protected List<Listener> listenerList = new ArrayList<>();

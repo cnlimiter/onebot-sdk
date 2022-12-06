@@ -1,12 +1,11 @@
 package cn.evolvefield.onebot.sdk.core;
 
 
-
 import cn.evolvefield.onebot.sdk.connection.ModWebSocketClient;
 import cn.evolvefield.onebot.sdk.handler.ActionHandler;
 import cn.evolvefield.onebot.sdk.model.action.common.*;
 import cn.evolvefield.onebot.sdk.model.action.response.*;
-import cn.evolvefield.onebot.sdk.model.event.message.*;
+import cn.evolvefield.onebot.sdk.model.event.message.GroupMessageEvent;
 import cn.evolvefield.onebot.sdk.util.json.util.GsonUtil;
 import cn.evolvefield.onebot.sdk.util.json.util.JsonsObject;
 import com.google.gson.Gson;
