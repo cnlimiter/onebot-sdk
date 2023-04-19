@@ -29,5 +29,8 @@ public class LifecycleMetaEvent extends MetaEvent {
         this.setTime(time);
     }
 
-
+    @Override
+    public void setMetaEventType(String metaEventType) {
+        super.setMetaEventType("lifecycle");
+    }
 }

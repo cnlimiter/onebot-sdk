@@ -33,4 +33,9 @@ public class HeartbeatMetaEvent extends MetaEvent {
         this.interval = interval;
     }
 
+    @Override
+    public void setMetaEventType(String metaEventType) {
+        super.setMetaEventType("heartbeat");
+    }
+
 }
