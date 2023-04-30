@@ -103,4 +103,8 @@ public class JsonsObject {
         return this.jsonObject.has(key) ? jsonObject.get(key).getAsJsonArray() : null;
     }
 
+    @Override
+    public String toString() {
+        return jsonObject.toString();
+    }
 }
