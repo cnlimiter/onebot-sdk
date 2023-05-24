@@ -6,7 +6,7 @@ plugins {
 version = project.sdk_version
 group = project.maven_group
 
-def targetJavaVersion = 17
+def targetJavaVersion = 8
 
 tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
@@ -36,6 +36,7 @@ dependencies {
     compileOnly 'org.slf4j:slf4j-api:2.0.1'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'com.google.code.gson:gson:2.8.9'
 }
 
 
