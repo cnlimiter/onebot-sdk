@@ -151,9 +151,21 @@ public class BotUtils {
      * @param msg 需要修改客户端消息上报类型为 string
      * @return 消息链
      */
-    public static List<MsgChainBean> stringToMsgChain(String msg) {
-        val array = new JsonArray();
+    public static List<MsgChainBean> stringToListChain(String msg) {
         Gson json = new Gson();
+        return (List<MsgChainBean>) json.fromJson(stringToJsonChain(msg), ArrayList.class);
+    }
+
+    /**
+     * string 消息上报转消息链
+     * 建议传入 event.getMessage 而非 event.getRawMessage
+     * 例如 go-cq-http rawMessage 不包含图片 url
+     *
+     * @param msg 需要修改客户端消息上报类型为 string
+     * @return 消息链
+     */
+    public static JsonArray stringToJsonChain(String msg) {
+        val array = new JsonArray();
         try {
             Arrays.stream(msg.split(CQ_CODE_SPLIT)).filter(s -> !s.isEmpty()).forEach(s -> {
                 val matcher = RegexUtils.regexMatcher(CQ_CODE_REGEX, s);
@@ -177,8 +189,9 @@ public class BotUtils {
             log.error("Raw message convert failed: {}", e.getMessage());
             return null;
         }
-        return (List<MsgChainBean>) json.fromJson(array, ArrayList.class);
+        return array;
     }
+
 
     /**
      * 从 ArrayMsg 生成 CQ Code
