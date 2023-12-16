@@ -37,10 +37,10 @@ public class GroupMemberInfoResp {
     private String area;
 
     @SerializedName("join_time")
-    private int joinTime;
+    private long joinTime;
 
     @SerializedName("last_sent_time")
-    private int lastSentTime;
+    private long lastSentTime;
 
     @SerializedName("level")
     private int level;
