@@ -15,7 +15,13 @@ public class JsonsObject {
     private final JsonObject jsonObject;
 
     public JsonsObject(String text){
-        this.jsonObject = parse(text);
+        JsonElement elm = getJsonElement(text);
+        if (elm == null) {
+           this.jsonObject = new JsonObject();
+        }
+        else
+            this.jsonObject = elm.getAsJsonObject();
+
     }
 
     public JsonsObject(JsonObject jsonObject){
@@ -27,13 +33,6 @@ public class JsonsObject {
     }
 
 
-    private JsonObject parse(String text) {
-        JsonElement elm = getJsonElement(text);
-        if (elm == null) {
-            return new JsonObject();
-        }
-        return elm.getAsJsonObject();
-    }
 
     public JsonObject get(){
         if (jsonObject != null) return jsonObject;

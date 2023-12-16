@@ -2,6 +2,7 @@ package cn.evole.onebot.sdk.entity;
 
 import cn.evole.onebot.sdk.enums.MsgTypeEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import java.util.Map;
  * Description:
  */
 @Data
+@Accessors(chain = true)
 public class ArrayMsg {
     private MsgTypeEnum type;
 

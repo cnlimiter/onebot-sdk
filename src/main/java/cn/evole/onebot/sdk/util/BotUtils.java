@@ -1,10 +1,14 @@
 package cn.evole.onebot.sdk.util;
 
 import cn.evole.onebot.sdk.entity.ArrayMsg;
-import cn.evole.onebot.sdk.entity.MsgChainBean;
+import cn.evole.onebot.sdk.enums.MsgTypeEnum;
+import cn.evole.onebot.sdk.event.message.MessageEvent;
+import cn.evole.onebot.sdk.util.json.GsonUtil;
+import cn.evole.onebot.sdk.util.json.JsonsObject;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import lombok.NonNull;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +45,7 @@ public class BotUtils {
      * @param arrayMsg 消息链
      * @return 是否为全体at
      */
-    public static boolean isAtAll(List<MsgChainBean> arrayMsg) {
+    public static boolean isAtAll(List<ArrayMsg> arrayMsg) {
         return arrayMsg.stream().anyMatch(it -> "all".equals(it.getData().get("qq")));
     }
 
@@ -51,7 +55,7 @@ public class BotUtils {
      * @param arrayMsg 消息链
      * @return at对象列表
      */
-    public static List<Long> getAtList(List<MsgChainBean> arrayMsg) {
+    public static List<Long> getAtList(List<ArrayMsg> arrayMsg) {
         return arrayMsg.stream().filter(it -> "at".equals(it.getType()) && !"all".equals(it.getData().get("qq"))).map(it -> Long.parseLong(it.getData().get("qq"))).collect(Collectors.toList());
     }
 
@@ -61,7 +65,7 @@ public class BotUtils {
      * @param arrayMsg 消息链
      * @return 图片链接列表
      */
-    public static List<String> getMsgImgUrlList(List<MsgChainBean> arrayMsg) {
+    public static List<String> getMsgImgUrlList(List<ArrayMsg> arrayMsg) {
         return arrayMsg.stream().filter(it -> "image".equals(it.getType())).map(it -> it.getData().get("url")).collect(Collectors.toList());
     }
 
@@ -71,7 +75,7 @@ public class BotUtils {
      * @param arrayMsg 消息链
      * @return 视频链接列表
      */
-    public static List<String> getMsgVideoUrlList(List<MsgChainBean> arrayMsg) {
+    public static List<String> getMsgVideoUrlList(List<ArrayMsg> arrayMsg) {
         return arrayMsg.stream().filter(it -> "video".equals(it.getType())).map(it -> it.getData().get("url")).collect(Collectors.toList());
     }
 
@@ -151,9 +155,9 @@ public class BotUtils {
      * @param msg 需要修改客户端消息上报类型为 string
      * @return 消息链
      */
-    public static List<MsgChainBean> stringToListChain(String msg) {
+    public static List<ArrayMsg> rawToList(String msg) {
         Gson json = new Gson();
-        return (List<MsgChainBean>) json.fromJson(stringToJsonChain(msg), ArrayList.class);
+        return (List<ArrayMsg>) json.fromJson(rawToJson(msg), ArrayList.class);
     }
 
     /**
@@ -164,7 +168,7 @@ public class BotUtils {
      * @param msg 需要修改客户端消息上报类型为 string
      * @return 消息链
      */
-    public static JsonArray stringToJsonChain(String msg) {
+    public static JsonArray rawToJson(String msg) {
         val array = new JsonArray();
         try {
             Arrays.stream(msg.split(CQ_CODE_SPLIT)).filter(s -> !s.isEmpty()).forEach(s -> {
@@ -206,6 +210,49 @@ public class BotUtils {
         builder.append("]");
         return builder.toString();
     }
+
+
+    /**
+     * 从 List<ArrayMsg> 生成 CQ Code
+     *
+     * @param arrayMsgs {@link ArrayMsg}
+     * @return CQ Code
+     */
+    @SuppressWarnings("SpellCheckingInspection")
+    public static String arrayMsgToCode(List<ArrayMsg> arrayMsgs) {
+        StringBuilder builder = new StringBuilder();
+        for (ArrayMsg item : arrayMsgs) {
+            if (!item.getType().equals(MsgTypeEnum.text)) {
+                builder.append("[CQ:").append(item.getType());
+                item.getData().forEach((k, v) -> builder.append(",").append(k).append("=").append(escape(v)));
+                builder.append("]");
+            } else {
+                builder.append(escape(item.getData().get(MsgTypeEnum.text.toString())));
+            }
+        }
+        return builder.toString();
+    }
+
+
+    /**
+     * 从 msg 转换
+     *
+     * @param msg {@link String}
+     * @param event {@link MessageEvent}
+     */
+    public static void rawConvert(@NonNull String msg, MessageEvent event) {
+        // 支持 array 格式消息上报，如果 msg 是一个有效的 json 字符串则作为 array 上报
+        if (msg.startsWith("[")) {
+            List<ArrayMsg> arrayMsg = GsonUtil.strToList(msg, ArrayMsg.class);
+            // 将 array message 转换回 string message
+            event.setArrayMsg(arrayMsg);
+            event.setMessage(arrayMsgToCode(arrayMsg));
+            return;
+        }
+        // string 格式消息上报
+        event.setArrayMsg(rawToList(msg));
+    }
+
 
 
     /**

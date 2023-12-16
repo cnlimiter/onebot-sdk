@@ -1,6 +1,6 @@
 package cn.evole.onebot.sdk.event.message;
 
-import cn.evole.onebot.sdk.entity.MsgChainBean;
+import cn.evole.onebot.sdk.entity.ArrayMsg;
 import cn.evole.onebot.sdk.event.Event;
 import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
@@ -36,6 +36,6 @@ public class MessageEvent extends Event {
     @SerializedName( "font")
     private int font;
 
-    private List<MsgChainBean> arrayMsg;
+    private List<ArrayMsg> arrayMsg;
 
 }
