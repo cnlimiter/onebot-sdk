@@ -1,5 +1,6 @@
 package cn.evole.onebot.sdk.response.group;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,10 +46,10 @@ public class GroupHonorInfoResp {
         @SerializedName("user_id")
         private long userId;
 
-        @SerializedName("nickname")
+        @Expose
         private String nickname;
 
-        @SerializedName("avatar")
+        @Expose
         private String avatar;
 
         @SerializedName("day_count")
