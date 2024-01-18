@@ -114,7 +114,7 @@ public class BotUtils {
      * @return 头像链接 （size为0返回真实大小, 40(40*40), 100(100*100), 640(640*640)）
      */
     public static String getUserAvatar(long userId, int size) {
-        return String.format("https://q2.qlogo.cn/headimg_dl?dst_uin=%s&spec=%s", userId, size);
+        return String.format("https://q1.qlogo.cn/g?b=qq&nk=%s&s=%s", userId, size);
     }
 
     /**

@@ -30,6 +30,12 @@ public class GetMsgResp {
     private Sender sender;
 
     /**
+     * 消息类型
+     */
+    @SerializedName("msg_type")
+    private String msgType;
+
+    /**
      * 发送时间
      */
     @SerializedName("time")
