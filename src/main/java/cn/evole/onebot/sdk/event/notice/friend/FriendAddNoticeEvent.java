@@ -13,7 +13,6 @@ import lombok.experimental.SuperBuilder;
  */
 @Data
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
 public class FriendAddNoticeEvent extends NoticeEvent {
 

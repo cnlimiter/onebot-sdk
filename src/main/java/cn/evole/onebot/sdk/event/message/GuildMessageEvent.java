@@ -15,7 +15,6 @@ import lombok.experimental.SuperBuilder;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
 public class GuildMessageEvent extends MessageEvent {
 

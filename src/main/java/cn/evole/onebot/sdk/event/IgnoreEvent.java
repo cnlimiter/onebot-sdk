@@ -11,7 +11,6 @@ import lombok.experimental.SuperBuilder;
  * Version: 1.0
  */
 @Data
-@SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
 public class IgnoreEvent extends Event{
     public IgnoreEvent(){

@@ -12,7 +12,6 @@ import lombok.experimental.SuperBuilder;
  */
 @Data
 @AllArgsConstructor
-@SuperBuilder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
 public class FriendAddRequestEvent extends RequestEvent {
 }
