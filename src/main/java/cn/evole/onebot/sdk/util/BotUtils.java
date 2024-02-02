@@ -3,11 +3,10 @@ package cn.evole.onebot.sdk.util;
 import cn.evole.onebot.sdk.entity.ArrayMsg;
 import cn.evole.onebot.sdk.enums.MsgTypeEnum;
 import cn.evole.onebot.sdk.event.message.MessageEvent;
-import cn.evole.onebot.sdk.util.json.GsonUtil;
-import cn.evole.onebot.sdk.util.json.JsonsObject;
-import com.google.gson.Gson;
+import cn.evole.onebot.sdk.util.json.GsonUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import lombok.NonNull;
 import lombok.val;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ import java.util.stream.Collectors;
  */
 public class BotUtils {
 
-    private static Logger log = LoggerFactory.getLogger("BotUtils");
+    private static final Logger log = LoggerFactory.getLogger("BotUtils");
     private final static String CQ_CODE_SPLIT = "(?<=\\[CQ:[^]]{1,99999}])|(?=\\[CQ:[^]]{1,99999}])";
 
     private final static String CQ_CODE_REGEX = "\\[CQ:([^,\\[\\]]+)((?:,[^,=\\[\\]]+=[^,\\[\\]]*)*)]";
@@ -156,8 +155,8 @@ public class BotUtils {
      * @return 消息链
      */
     public static List<ArrayMsg> rawToList(String msg) {
-        Gson json = new Gson();
-        return (List<ArrayMsg>) json.fromJson(rawToJson(msg), ArrayList.class);
+        return GsonUtils.fromJson(rawToJson(msg), new TypeToken<List<ArrayMsg>>() {
+        }.getType());
     }
 
     /**
@@ -243,7 +242,7 @@ public class BotUtils {
     public static void rawConvert(@NonNull String msg, MessageEvent event) {
         // 支持 array 格式消息上报，如果 msg 是一个有效的 json 字符串则作为 array 上报
         if (msg.startsWith("[")) {
-            List<ArrayMsg> arrayMsg = GsonUtil.strToList(msg, ArrayMsg.class);
+            List<ArrayMsg> arrayMsg = GsonUtils.convertToList(msg, ArrayMsg.class);
             // 将 array message 转换回 string message
             event.setArrayMsg(arrayMsg);
             event.setMessage(arrayMsgToCode(arrayMsg));
