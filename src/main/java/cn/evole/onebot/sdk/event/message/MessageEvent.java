@@ -35,6 +35,7 @@ public class MessageEvent extends Event {
     @SerializedName( "font")
     private int font;
 
+    @SerializedName( "array_msg")
     private List<ArrayMsg> arrayMsg;
 
 }
