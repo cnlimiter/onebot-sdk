@@ -236,20 +236,18 @@ public class BotUtils {
     /**
      * 从 msg 转换
      *
-     * @param msg {@link String}
+     * @param rawJson {@link JsonObject}
      * @param event {@link MessageEvent}
      */
-    public static void rawConvert(@NonNull String msg, MessageEvent event) {
+    public static void rawConvert(JsonObject rawJson, MessageEvent event) {
         // 支持 array 格式消息上报，如果 msg 是一个有效的 json 字符串则作为 array 上报
-        if (msg.startsWith("[")) {
-            List<ArrayMsg> arrayMsg = GsonUtils.convertToList(msg, ArrayMsg.class);
-            // 将 array message 转换回 string message
+        if (rawJson.has("message") && GsonUtils.isArrayNode(rawJson, "message")) {
+            List<ArrayMsg> arrayMsg = GsonUtils.convertToList(GsonUtils.getAsString(rawJson, "message"), ArrayMsg.class);
+            // 存入 array message
             event.setArrayMsg(arrayMsg);
+            // 将 array message 转换回 string message
             event.setMessage(arrayMsgToCode(arrayMsg));
-            return;
         }
-        // string 格式消息上报
-        event.setArrayMsg(rawToList(msg));
     }
 
 
