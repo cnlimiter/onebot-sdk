@@ -219,7 +219,7 @@ public class BotUtils {
     public static String arrayMsgToCode(List<ArrayMsg> arrayMsgs) {
         StringBuilder builder = new StringBuilder();
         for (ArrayMsg item : arrayMsgs) {
-            if (!item.getType().equals(MsgType.text)) {
+            if (item.getType() != null && !item.getType().equals(MsgType.text)) {
                 builder.append("[CQ:").append(item.getType());
                 item.getData().forEach((k, v) -> builder.append(",").append(k).append("=").append(escape(v)));
                 builder.append("]");
