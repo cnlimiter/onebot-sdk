@@ -1,7 +1,5 @@
 package cn.evole.onebot.sdk.util;
 
-import java.lang.reflect.Array;
-
 /**
  * @Project: onebot-sdk
  * @Author: cnlimiter

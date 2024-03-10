@@ -10,7 +10,7 @@ import lombok.Getter;
  * Version: 1.0
  */
 @Getter
-public enum ActionPathEnum implements ActionPath {
+public enum ActionType implements ActionPath {
     /**
      * 发送私聊消息
      */
@@ -254,7 +254,7 @@ public enum ActionPathEnum implements ActionPath {
      *
      * @param path 请求路径
      */
-    ActionPathEnum(String path) {
+    ActionType(String path) {
         this.path = path;
     }
 

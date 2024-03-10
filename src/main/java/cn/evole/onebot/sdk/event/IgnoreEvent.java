@@ -22,6 +22,4 @@ public class IgnoreEvent extends Event{
         this.setTime(System.currentTimeMillis());
         this.setSelfId(id);
     }
-
-
 }

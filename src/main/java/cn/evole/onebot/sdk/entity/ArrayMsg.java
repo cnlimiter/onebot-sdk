@@ -1,6 +1,6 @@
 package cn.evole.onebot.sdk.entity;
 
-import cn.evole.onebot.sdk.enums.MsgTypeEnum;
+import cn.evole.onebot.sdk.enums.MsgType;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -15,7 +15,7 @@ import java.util.Map;
 @Data
 @Accessors(chain = true)
 public class ArrayMsg {
-    private MsgTypeEnum type;
+    private MsgType type;
 
     private Map<String, String> data;
 }

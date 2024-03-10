@@ -17,8 +17,7 @@ public class FileUtils {
         if (!folder.toFile().isDirectory()) {
             try {
                 Files.createDirectories(folder);
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ignored) {
             }
         }
     }

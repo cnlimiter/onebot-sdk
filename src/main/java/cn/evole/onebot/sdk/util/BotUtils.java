@@ -1,13 +1,11 @@
 package cn.evole.onebot.sdk.util;
 
 import cn.evole.onebot.sdk.entity.ArrayMsg;
-import cn.evole.onebot.sdk.enums.MsgTypeEnum;
+import cn.evole.onebot.sdk.enums.MsgType;
 import cn.evole.onebot.sdk.event.message.MessageEvent;
-import cn.evole.onebot.sdk.util.json.GsonUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import lombok.NonNull;
 import lombok.val;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -221,12 +219,12 @@ public class BotUtils {
     public static String arrayMsgToCode(List<ArrayMsg> arrayMsgs) {
         StringBuilder builder = new StringBuilder();
         for (ArrayMsg item : arrayMsgs) {
-            if (!item.getType().equals(MsgTypeEnum.text)) {
+            if (!item.getType().equals(MsgType.text)) {
                 builder.append("[CQ:").append(item.getType());
                 item.getData().forEach((k, v) -> builder.append(",").append(k).append("=").append(escape(v)));
                 builder.append("]");
             } else {
-                builder.append(escape(item.getData().get(MsgTypeEnum.text.toString())));
+                builder.append(escape(item.getData().get(MsgType.text.toString())));
             }
         }
         return builder.toString();
@@ -246,7 +244,11 @@ public class BotUtils {
             // 存入 array message
             event.setArrayMsg(arrayMsg);
             // 将 array message 转换回 string message
-            event.setMessage(arrayMsgToCode(arrayMsg));
+            event.setMessage(GsonUtils.getAsJsonArray(rawJson, "message").toString());
+            // 解析cq消息
+            if (rawJson.has("raw_message") && (event.getRawMessage() == null || event.getRawMessage().isEmpty())){
+                event.setRawMessage(arrayMsgToCode(arrayMsg));
+            }
         }
     }
 
@@ -261,9 +263,9 @@ public class BotUtils {
      *                 <a href="https://docs.go-cqhttp.org/cqcode/#%E5%90%88%E5%B9%B6%E8%BD%AC%E5%8F%91">参考文档</a>
      * @return 转发消息
      */
-    public static List<Map<String, Object>> generateForwardMsg(long uin, String name, List<String> contents) {
+    public static List<Map<String, Object>> generateForwardMsg(long uin, String name, String... contents) {
         val nodes = new ArrayList<Map<String, Object>>();
-        contents.forEach(msg -> {
+        Arrays.stream(contents).forEach(msg -> {
             val node = new HashMap<String, Object>(16) {{
                 put("type", "node");
                 put("data", new HashMap<String, Object>(16) {{

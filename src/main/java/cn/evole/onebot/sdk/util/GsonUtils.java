@@ -1,4 +1,4 @@
-package cn.evole.onebot.sdk.util.json;
+package cn.evole.onebot.sdk.util;
 
 import cn.evole.onebot.sdk.util.StringUtils;
 import com.google.gson.*;
@@ -40,6 +40,7 @@ public class GsonUtils {
             .disableHtmlEscaping() //防止特殊字符出现乱码
             .create(); // 不过滤空值
 
+
     //获取gson解析器
     public static Gson getGson() {
         return GSON;
@@ -49,7 +50,6 @@ public class GsonUtils {
     public static Gson getNullGson() {
         return GSON_NULL;
     }
-
 
     /**
      * 根据对象返回json  过滤空值字段

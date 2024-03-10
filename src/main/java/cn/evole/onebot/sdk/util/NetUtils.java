@@ -33,14 +33,14 @@ public class NetUtils {
             }
             return result.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getLocalizedMessage());
         } finally {
             try {
                 if (bufferedReader != null) {
                     bufferedReader.close();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println(e.getLocalizedMessage());
             }
         }
         return null;

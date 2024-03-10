@@ -6,7 +6,7 @@ package cn.evole.onebot.sdk.enums;
  * Date: 2023/2/10 1:29
  * Description:
  */
-public enum MsgTypeEnum {
+public enum MsgType {
     /**
      * at 某人
      */

@@ -48,7 +48,7 @@ public class StrangerInfoResp {
     private int level;
 
     /**
-     * 在线天数？我猜的（
+     * QQ达人（连续登录）天数
      */
     @SerializedName("login_days")
     private int loginDays;

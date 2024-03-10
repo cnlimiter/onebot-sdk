@@ -1,15 +1,19 @@
-package cn.evole.onebot.sdk.map;
+package cn.evole.onebot.sdk.event;
 
-import cn.evole.onebot.sdk.event.Event;
-import cn.evole.onebot.sdk.event.meta.HeartbeatMetaEvent;
-import cn.evole.onebot.sdk.event.meta.LifecycleMetaEvent;
 import cn.evole.onebot.sdk.event.message.GroupMessageEvent;
 import cn.evole.onebot.sdk.event.message.GuildMessageEvent;
 import cn.evole.onebot.sdk.event.message.PrivateMessageEvent;
 import cn.evole.onebot.sdk.event.message.WholeMessageEvent;
+import cn.evole.onebot.sdk.event.meta.HeartbeatMetaEvent;
+import cn.evole.onebot.sdk.event.meta.LifecycleMetaEvent;
 import cn.evole.onebot.sdk.event.notice.friend.FriendAddNoticeEvent;
 import cn.evole.onebot.sdk.event.notice.friend.PrivateMsgDeleteNoticeEvent;
 import cn.evole.onebot.sdk.event.notice.group.*;
+import cn.evole.onebot.sdk.event.notice.guild.ChannelCreatedNoticeEvent;
+import cn.evole.onebot.sdk.event.notice.guild.ChannelDestroyedNoticeEvent;
+import cn.evole.onebot.sdk.event.notice.guild.ChannelUpdatedNoticeEvent;
+import cn.evole.onebot.sdk.event.notice.guild.MessageReactionsUpdatedNoticeEvent;
+import cn.evole.onebot.sdk.event.notice.misc.OtherClientStatusNoticeEvent;
 import cn.evole.onebot.sdk.event.notice.misc.ReceiveOfflineFilesNoticeEvent;
 import cn.evole.onebot.sdk.event.request.FriendAddRequestEvent;
 import cn.evole.onebot.sdk.event.request.GroupAddRequestEvent;
@@ -23,7 +27,7 @@ import java.util.Map;
  * Date: 2022/9/14 17:04
  * Version: 1.0
  */
-public class MessageMap {
+public class EventMap {
     public static Map<String, Class<? extends Event>> messageMap = new HashMap<>();
 
     static {
@@ -53,6 +57,16 @@ public class MessageMap {
 
         messageMap.put("lifecycle", LifecycleMetaEvent.class);
         messageMap.put("heartbeat", HeartbeatMetaEvent.class);
+
+        messageMap.put("guild_channel_create", ChannelCreatedNoticeEvent.class);
+        messageMap.put("guild_channel_destroy", ChannelDestroyedNoticeEvent.class);
+        messageMap.put("guild_channel_update", ChannelUpdatedNoticeEvent.class);
+        messageMap.put("guild_message_reactions_update", MessageReactionsUpdatedNoticeEvent.class);
+
+
+        messageMap.put("other_client_status", OtherClientStatusNoticeEvent.class);
+        messageMap.put("receive_offline_files", ReceiveOfflineFilesNoticeEvent.class);
+
 
     }
 }
