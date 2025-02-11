@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
+ * 群聊消息
+ *
  * @author cnlimiter
  */
 @Data

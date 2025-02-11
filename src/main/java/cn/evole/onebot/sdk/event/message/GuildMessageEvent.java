@@ -10,7 +10,7 @@ import lombok.experimental.SuperBuilder;
 /**
  * 频道消息
  *
- * @author Alexskim
+ * @author cnlimiter
  */
 @Data
 @NoArgsConstructor

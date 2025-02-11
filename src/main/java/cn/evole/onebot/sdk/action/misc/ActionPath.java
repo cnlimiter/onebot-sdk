@@ -1,4 +1,4 @@
-package cn.evole.onebot.sdk.action;
+package cn.evole.onebot.sdk.action.misc;
 
 /**
  * Description:

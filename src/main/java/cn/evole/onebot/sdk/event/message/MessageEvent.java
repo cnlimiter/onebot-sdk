@@ -12,6 +12,8 @@ import lombok.experimental.SuperBuilder;
 import java.util.List;
 
 /**
+ * 基础消息
+ *
  * @author cnlimiter
  */
 @Data

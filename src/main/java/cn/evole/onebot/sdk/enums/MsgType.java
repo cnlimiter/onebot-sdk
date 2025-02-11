@@ -23,6 +23,21 @@ public enum MsgType {
     face,
 
     /**
+     * 商城大表情消息
+     **/
+    mface,
+
+    /**
+     * 商城大表情消息
+     **/
+    marketface,
+
+    /**
+     * 投篮表情
+     */
+    basketball,
+
+    /**
      * 语音
      */
     record,
@@ -38,9 +53,19 @@ public enum MsgType {
     rps,
 
     /**
+     * 新猜拳表情
+     */
+    new_rps,
+
+    /**
      * 掷骰子魔法表情
      */
     dice,
+
+    /**
+     * 新掷骰子表情
+     */
+    new_dice,
 
     /**
      * 窗口抖动（戳一戳）
@@ -103,6 +128,16 @@ public enum MsgType {
     forward,
 
     /**
+     * 富文本消息
+     */
+    markdown,
+
+    /**
+     * 富文本下的按钮
+     */
+    keyboard,
+
+    /**
      * 合并转发消息节点
      */
     node,
@@ -125,5 +160,33 @@ public enum MsgType {
     /**
      * 文本转语音
      */
-    tts
+    tts,
+
+    /**
+     * 长消息
+     */
+    longmsg,
+
+    /**
+     * 未知类型
+     */
+    unknown;
+
+    public static MsgType typeOf(String type) {
+        for (MsgType t : values()) {
+            if (t.name().equals(type)) {
+                return t;
+            }
+        }
+        return unknown;
+    }
+
+    public static boolean isValidMsgType(MsgType typeEnum) {
+        for (MsgType t : MsgType.values()) {
+            if (t == typeEnum) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

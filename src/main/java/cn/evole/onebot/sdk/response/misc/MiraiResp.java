@@ -1,6 +1,6 @@
 package cn.evole.onebot.sdk.response.misc;
 
-import cn.evole.onebot.sdk.action.ActionData;
+import cn.evole.onebot.sdk.action.misc.ActionData;
 import cn.evole.onebot.sdk.entity.MsgId;
 import com.google.gson.annotations.Expose;
 import lombok.Data;

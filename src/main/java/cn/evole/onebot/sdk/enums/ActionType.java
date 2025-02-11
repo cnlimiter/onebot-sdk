@@ -1,6 +1,6 @@
 package cn.evole.onebot.sdk.enums;
 
-import cn.evole.onebot.sdk.action.ActionPath;
+import cn.evole.onebot.sdk.action.misc.ActionPath;
 import lombok.Getter;
 
 /**
@@ -68,11 +68,11 @@ public enum ActionType implements ActionPath {
      */
     SET_FRIEND_ADD_REQUEST("set_friend_add_request"),
     /**
-     * 《处理加群请求／邀请
+     * 处理加群请求／邀请
      */
     SET_GROUP_ADD_REQUEST("set_group_add_request"),
     /**
-     * 《获取登录号信息
+     * 获取登录号信息
      */
     GET_LOGIN_INFO("get_login_info"),
     /**
@@ -242,7 +242,47 @@ public enum ActionType implements ActionPath {
     /**
      * 删除单向好友
      */
-    DELETE_UNIDIRECTIONAL_FRIEND("delete_unidirectional_friend");
+    DELETE_UNIDIRECTIONAL_FRIEND("delete_unidirectional_friend"),
+    /**
+     * 创建群文件文件夹
+     */
+    CREATE_GROUP_FILE_FOLDER("create_group_file_folder"),
+    /**
+     * 删除群文件文件夹
+     */
+    DELETE_GROUP_FOLDER("delete_group_folder"),
+    /**
+     * 删除群文件
+     */
+    DELETE_GROUP_FILE("delete_group_file"),
+    /**
+     * 获取群文件资源链接
+     */
+    GET_GROUP_FILE_URL("get_group_file_url"),
+    /**
+     * 下载收到的群文件或私聊文件（LLOneBot）
+     */
+    GET_FILE("get_file"),
+    /**
+     * 发送好友赞
+     */
+    SEND_LIKE("send_like"),
+    /**
+     * 获取状态
+     */
+    GET_STATUS("get_status"),
+    /**
+     * 获取收藏表情
+     */
+    FETCH_CUSTOM_FACE("fetch_custom_face"),
+    /**
+     * 获取版本信息
+     */
+    GET_VERSION_INFO("get_version_info"),
+    /**
+     * 设置群消息表情回应
+     */
+    SET_GROUP_REACTION("set_group_reaction");
 
     /**
      * 请求路径
@@ -259,9 +299,9 @@ public enum ActionType implements ActionPath {
     }
 
     /**
+     * {@inheritDoc}
+     * <p>
      * 获取请求路径
-     *
-     * @return 请求路径
      */
     @Override
     public String getPath() {
